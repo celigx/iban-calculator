@@ -4,8 +4,8 @@ type AutocompleteOption = {
 };
 
 export const bankIdentifierList: AutocompleteOption[] = [
-  { label: "4115008 - Banco Popolare Croatia d.d.", bankId: 411500 },
-  { label: "4133006 - Banka Kovanica d.d.", bankId: 413300 },
+  { label: "4115008 - Banco Popolare Croatia d.d.", bankId: 4115008 },
+  { label: "4133006 - Banka Kovanica d.d.", bankId: 4133006 },
   { label: "4109006 - Banka Splitsko-Dalmatinska d.d.", bankId: 4109006 },
   { label:"2488001 - BKS Bank d.d.", bankId: 2488001 },
   { label:"2485003 - Croatia Banka d.d.", bankId: 2485003 },
