@@ -16,6 +16,25 @@ function App() {
   const handleAccountNumber = (e: any) => {
     setAccountNumber(e.target.value)
   }  
+
+  const calculateIBAN = () => {
+    const countryCode: string = 'HR'
+    // Convert HR to 1727 => H = 17, R = 27
+    const convertAplhaToNumeric: string = '1727' + '00'
+    const concatInputs: string = String(bankIdentifier) + accountNumber + convertAplhaToNumeric
+    // Split into two parts - 11 and 12
+    const splitNumber: string[] = concatInputs.split((/(\d{11})(\d{12})/));
+    // Calculate the modulo 97 from the first part
+    const firstRemainder: number = parseInt(splitNumber[1]) % 97
+    // Calculate the modulo 97 from the second part
+    const secondRemainder: number = parseInt(String(firstRemainder + splitNumber[2])) % 97    
+    // Calculate the check number
+    const checkNumber: number = (97 + 1) - secondRemainder
+
+    // Concat to IBAN format
+    const IBAN: string = String(checkNumber).length === 1 ? countryCode + '0' + checkNumber + bankIdentifier + accountNumber : countryCode + checkNumber + bankIdentifier + accountNumber
+    console.log('IBAN', IBAN);
+  }
   
   return (
     <div className="app">
@@ -42,7 +61,7 @@ function App() {
           variant="outlined"
           onChange={handleAccountNumber}
         />
-        <Button className="calculateBtn" variant="outlined" size="large">Izračunajte</Button>
+        <Button className="calculateBtn" variant="outlined" size="large" onClick={calculateIBAN}>Izračunajte</Button>
       </div>
     </div>
   );
