@@ -8,6 +8,7 @@ import { bankIdentifierList } from './helper/BankIdentifierList';
 function App() {
   const [bankIdentifier, setBankIdentifier] = useState<number>()
   const [accountNumber, setAccountNumber] = useState<string>('')
+  const [iban, setIban] = useState<string>()  
 
   const handleBankIdentifier = (e: any, newValue: any) => {
     setBankIdentifier(newValue.bankId)
@@ -34,6 +35,8 @@ function App() {
     // Concat to IBAN format
     const IBAN: string = String(checkNumber).length === 1 ? countryCode + '0' + checkNumber + bankIdentifier + accountNumber : countryCode + checkNumber + bankIdentifier + accountNumber
     console.log('IBAN', IBAN);
+    
+    setIban(IBAN)
   }
   
   return (
@@ -62,6 +65,9 @@ function App() {
           onChange={handleAccountNumber}
         />
         <Button className="calculateBtn" variant="outlined" size="large" onClick={calculateIBAN}>Izračunajte</Button>
+      </div>
+      <div className={iban === undefined ? "ibanContainer" : "ibanContainer show"}>
+        {iban}
       </div>
     </div>
   );
