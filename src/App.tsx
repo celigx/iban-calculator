@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
 import './App.sass';
 import { bankIdentifierList } from './helper/BankIdentifierList';
 
 function App() {
   const [bankIdentifier, setBankIdentifier] = useState<number>()
-  const [accountNumber, setAccountNumber] = useState<string>()
+  const [accountNumber, setAccountNumber] = useState<string>('')
 
   const handleBankIdentifier = (e: any, newValue: any) => {
     setBankIdentifier(newValue.bankId)
-  }
+  }  
 
   const handleAccountNumber = (e: any) => {
     setAccountNumber(e.target.value)
   }  
-
+  
   return (
     <div className="app">
 
@@ -41,6 +42,7 @@ function App() {
           variant="outlined"
           onChange={handleAccountNumber}
         />
+        <Button className="calculateBtn" variant="outlined" size="large">Izračunajte</Button>
       </div>
     </div>
   );
