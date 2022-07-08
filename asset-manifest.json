@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/iban-calculator/static/css/main.1b8d62b0.css",
+    "main.js": "/iban-calculator/static/js/main.300c3d04.js",
+    "static/js/787.07b4093a.chunk.js": "/iban-calculator/static/js/787.07b4093a.chunk.js",
+    "index.html": "/iban-calculator/index.html",
+    "main.1b8d62b0.css.map": "/iban-calculator/static/css/main.1b8d62b0.css.map",
+    "main.300c3d04.js.map": "/iban-calculator/static/js/main.300c3d04.js.map",
+    "787.07b4093a.chunk.js.map": "/iban-calculator/static/js/787.07b4093a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1b8d62b0.css",
+    "static/js/main.300c3d04.js"
+  ]
+}
