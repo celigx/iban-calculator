@@ -81,6 +81,9 @@ function App() {
           onChange={handleAccountNumber}
           error={error.accountNumber}
           helperText={error.accountNumber ? "Broj računa ne može biti kraći od 10 znamenaka!" : ""}
+          inputProps={{
+            maxLength: 10,
+          }}
         />
         <Button disableElevation className="calculateBtn" variant="contained" size="large" onClick={calculateIBAN}>Izračunajte</Button>
       </div>
