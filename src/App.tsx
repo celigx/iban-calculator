@@ -41,14 +41,14 @@ function App() {
     const IBAN: string = String(checkNumber).length === 1 ? countryCode + '0' + checkNumber + bankIdentifier + accountNumber : countryCode + checkNumber + bankIdentifier + accountNumber
     console.log('IBAN', IBAN);
 
+    controlTextFieldError()
+
     if (bankIdentifier === undefined || accountNumber.length < 10) {
       return null
     } else {
-      setShowIban(true)
       setIban(IBAN)
+      setShowIban(true)
     }
-
-    controlTextFieldError()
   }
 
   const controlTextFieldError: any = () => {
