@@ -9,6 +9,7 @@ function App() {
   const [bankIdentifier, setBankIdentifier] = useState<number>()
   const [accountNumber, setAccountNumber] = useState<string>('')
   const [iban, setIban] = useState<string>()  
+  const [showIban, setShowIban] = useState<boolean>(false)
   const [error, setError] = useState<{accountNumber: boolean, bankIdentifier: boolean}>({
     accountNumber: false,
     bankIdentifier: false
@@ -39,8 +40,13 @@ function App() {
     // Concat to IBAN format
     const IBAN: string = String(checkNumber).length === 1 ? countryCode + '0' + checkNumber + bankIdentifier + accountNumber : countryCode + checkNumber + bankIdentifier + accountNumber
     console.log('IBAN', IBAN);
-    
-    setIban(IBAN)
+
+    if (bankIdentifier === undefined || accountNumber.length < 10) {
+      return null
+    } else {
+      setShowIban(true)
+      setIban(IBAN)
+    }
 
     controlTextFieldError()
   }
@@ -78,7 +84,7 @@ function App() {
         />
         <Button disableElevation className="calculateBtn" variant="contained" size="large" onClick={calculateIBAN}>Izračunajte</Button>
       </div>
-      <div className={error.bankIdentifier || error.accountNumber ? "ibanContainer" : "ibanContainer show"}>
+      <div className={showIban ? "ibanContainer show" : "ibanContainer"}>
         {iban}
       </div>
     </div>
