@@ -9,6 +9,10 @@ function App() {
   const [bankIdentifier, setBankIdentifier] = useState<number>()
   const [accountNumber, setAccountNumber] = useState<string>('')
   const [iban, setIban] = useState<string>()  
+  const [error, setError] = useState<{accountNumber: boolean, bankIdentifier: boolean}>({
+    accountNumber: false,
+    bankIdentifier: false
+  })
 
   const handleBankIdentifier = (e: any, newValue: any) => {
     setBankIdentifier(newValue.bankId)
@@ -37,6 +41,13 @@ function App() {
     console.log('IBAN', IBAN);
     
     setIban(IBAN)
+
+    controlTextFieldError()
+  }
+
+  const controlTextFieldError: any = () => {
+    accountNumber.length < 10 ? setError((prevState) => ({...prevState, accountNumber: true})) : setError((prevState) => ({...prevState, accountNumber: false}))
+    bankIdentifier === undefined ? setError((prevState) => ({...prevState, bankIdentifier: true})) : setError((prevState) => ({...prevState, bankIdentifier: false}))
   }
   
   return (
@@ -53,20 +64,21 @@ function App() {
           disablePortal
           id="combo-box-demo"
           options={bankIdentifierList}
-          renderInput={(params) => <TextField {...params} label="Odaberite vodeći broj banke" />}
+          renderInput={(params) => <TextField {...params} error={error.bankIdentifier} helperText={error.bankIdentifier ? "Molimo odaberite vodeći broj banke" : ""} label="Odaberite vodeći broj banke" />}
           onChange={handleBankIdentifier}
           />
         {/* Account number */}
         <TextField 
           className='textField' 
-          id="outlined-basic" 
           label="Unesite broj računa" 
           variant="outlined"
           onChange={handleAccountNumber}
+          error={error.accountNumber}
+          helperText={error.accountNumber ? "Broj računa ne može biti kraći od 10 znamenaka!" : ""}
         />
-        <Button className="calculateBtn" variant="outlined" size="large" onClick={calculateIBAN}>Izračunajte</Button>
+        <Button disableElevation className="calculateBtn" variant="contained" size="large" onClick={calculateIBAN}>Izračunajte</Button>
       </div>
-      <div className={iban === undefined ? "ibanContainer" : "ibanContainer show"}>
+      <div className={error.bankIdentifier || error.accountNumber ? "ibanContainer" : "ibanContainer show"}>
         {iban}
       </div>
     </div>
